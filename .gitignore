@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Pipeline scripts — generated prompts + run artifacts (the .version.json files stay tracked)
+scripts/scriptData/prompts/
+scripts/scriptData/cook-usage.json
+
+# pixelProof — visual-regression report + proof images
+scripts/scriptData/pixelproof/
+
+# DesignToDev pipeline bookkeeping — version tracker + drift reports/screenshots.
+# Regenerated every run and deliberately excluded from every generated PR, so it
+# must never be git-tracked (a tracked-but-perpetually-dirty file breaks branch
+# switching once its committed baseline ever diverges).
+scripts/DesignToDev/scriptData/
+
+# Legacy pipeline output (superseded by scripts/scriptData/)
+pipeline_data/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

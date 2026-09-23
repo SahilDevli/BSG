@@ -1,0 +1,100 @@
+{
+  "name": "bsg",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+
+    "designToken": "tsx scripts/DesignToDev/designToken.ts",
+    "designToken:dry": "tsx scripts/DesignToDev/designToken.ts --dry",
+
+    "componentPipeline": "tsx scripts/DesignToDev/componentPipeline.ts",
+    "componentPipeline:dry": "tsx scripts/DesignToDev/componentPipeline.ts --dry",
+    "componentPipeline:version": "tsx scripts/DesignToDev/componentPipeline.ts --version",
+    "componentPipeline:versionDry": "tsx scripts/DesignToDev/componentPipeline.ts --version --dry",
+    "componentPipeline:create": "tsx scripts/DesignToDev/componentPipeline.ts --create",
+    "componentPipeline:createDry": "tsx scripts/DesignToDev/componentPipeline.ts --create --dry",
+    "componentPipeline:update": "tsx scripts/DesignToDev/componentPipeline.ts --update",
+    "componentPipeline:updateDry": "tsx scripts/DesignToDev/componentPipeline.ts --update --dry",
+
+    "pagePipeline": "tsx scripts/DesignToDev/pagePipeline.ts",
+    "pagePipeline:dry": "tsx scripts/DesignToDev/pagePipeline.ts --dry",
+    "pagePipeline:version": "tsx scripts/DesignToDev/pagePipeline.ts --version",
+    "pagePipeline:versionDry": "tsx scripts/DesignToDev/pagePipeline.ts --version --dry",
+    "pagePipeline:create": "tsx scripts/DesignToDev/pagePipeline.ts --create",
+    "pagePipeline:createDry": "tsx scripts/DesignToDev/pagePipeline.ts --create --dry",
+    "pagePipeline:update": "tsx scripts/DesignToDev/pagePipeline.ts --update",
+    "pagePipeline:updateDry": "tsx scripts/DesignToDev/pagePipeline.ts --update --dry",
+
+    "driftDetection": "tsx scripts/DesignToDev/driftDetection.ts",
+    "driftDetection:dry": "tsx scripts/DesignToDev/driftDetection.ts --dry",
+    "driftDetection:components": "tsx scripts/DesignToDev/driftDetection.ts --components",
+    "driftDetection:pages": "tsx scripts/DesignToDev/driftDetection.ts --pages",
+
+    "storybookDocs": "tsx scripts/DesignToDev/storybookDocs.ts",
+    "storybookDocs:dry": "tsx scripts/DesignToDev/storybookDocs.ts --dry",
+    "storybookDocs:scaffold": "tsx scripts/DesignToDev/storybookDocs.ts --scaffold-only"
+  },
+  "drift": {
+    "scale": 2,
+    "pageScale": 1,
+    "threshold": 11,
+    "pageThreshold": 25,
+    "pagesFailBuild": false,
+    "diffColorThreshold": 0.3,
+    "useAbsoluteBounds": true,
+    "fontCss": "",
+    "components": {}
+  },
+  "git": {
+    "baseBranch": "",
+    "branchPrefix": "design",
+    "remote": "origin",
+    "maxDriftPercent": 20,
+    "excludePaths": [
+      "scripts/DesignToDev/scriptData/"
+    ],
+    "draft": false
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/react-vite": "^10.6.0",
+    "@testing-library/react": "^16.3.3",
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.13.6",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.11.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "eslint-plugin-storybook": "^10.6.0",
+    "globals": "^17.12.0",
+    "jsdom": "^29.1.1",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "sass": "^1.105.0",
+    "storybook": "^10.6.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.0",
+    "vitest": "^4.1.11"
+  }
+}
