@@ -1,0 +1,79 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FooterStories from './Footer.stories';
+
+<Meta of={FooterStories} />
+
+# Footer
+
+The site footer for Blue Sea Global: brand wordmark and legacy note on the left, two
+link columns and an email capture form on the right, and a centred copyright line.
+Use it once per page as the closing landmark.
+
+<Canvas of={FooterStories.Desktop} />
+
+<Controls />
+
+## Variants
+
+The Figma component set defines no variant properties — its two nodes are the same
+footer at two screen widths, so the breakpoint is a media query, not a prop.
+
+### Desktop
+
+The 1440×459 design (`@media (min-width: 1440px)`): wordmark at 64px, the note at 24px
+holding its Figma line breaks, and the link columns 28px apart.
+
+<Canvas of={FooterStories.Desktop} />
+
+### Laptop
+
+The 1024×459 design (`@media (min-width: 1024px)`): wordmark at 58px, the note at 16px,
+link columns 11px apart and the email form pulled left to sit under them.
+
+<Canvas of={FooterStories.Laptop} />
+
+## Usage
+
+```tsx
+import { Footer } from './components/Footer/Footer';
+
+export function Page() {
+  return (
+    <>
+      <main>{/* … */}</main>
+      <Footer onSubmit={(email) => subscribe(email)} />
+    </>
+  );
+}
+```
+
+## Responsive
+
+At 1024px and above the footer is a fixed 459px-tall band that reproduces the Figma
+offsets. Below 1024px the same parts stack in source order inside 24px of side padding:
+the wordmark scales with `clamp(36px, 9vw, 58px)`, the note wraps rather than holding its
+design line breaks, the two link columns wrap onto separate rows when they no longer fit,
+and the email field shrinks below its 280px design width. Verified down to 375px.
+
+## Accessibility
+
+- The root is a `<footer>` (implicit `contentinfo` landmark).
+- Each link column is a `<nav>` labelled `Quick Links` / `Other Businesses`, containing a
+  heading and a `<ul>` of links.
+- The email `<input type="email">` is bound to its `<label>` through a `useId` pair.
+- A malformed address sets `aria-invalid="true"`, links the input to the message with
+  `aria-describedby`, and renders that message with `role="alert"`.
+- The input, the submit button and every link have a visible `:focus-visible` ring; tab
+  order follows the visual order of the two columns and then the form.
+
+## Assumptions
+
+- `Button` and `Input` do not exist in this repository, so the email field and submit
+  button are built in place from the Figma instance specs.
+- Figma draws no error, hover or active state here; validation, the red border and the
+  button's `brightness()` feedback are the conventional patterns.
+- `#e0e0e0` (surface), `#000000` (body text) and `#4f46e5` (submit fill) have no token in
+  `src/designToken.css` and are kept as literals.
+- The Figma nodes contain no images or icons, so no assets were downloaded.
+- Instrument Serif and Inter lead the font stacks, but the project loads no webfonts, so
+  both fall back to the platform serif / sans.
