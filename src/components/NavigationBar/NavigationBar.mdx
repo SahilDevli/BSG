@@ -1,0 +1,105 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as NavigationBarStories from './NavigationBar.stories';
+
+<Meta of={NavigationBarStories} />
+
+# NavigationBar
+
+The site-wide top bar: wordmark on the left, primary links in the middle and a single
+call-to-action on the right. It is translucent (white at 10% over a `blur(7px)` backdrop), so use
+it layered over a dark hero image rather than on a plain light page.
+
+<Canvas of={NavigationBarStories.Desktop} />
+
+<Controls />
+
+## Variants
+
+The Figma component set defines no variant properties. `Navigation-Desktop` (1440x95) and
+`Navigation-Laptop` (1024x95) are the same bar at two screen widths, so they are media queries in
+`NavigationBar.module.scss` rather than props — both stories render the same markup and differ
+only with the canvas width.
+
+### Screen — Desktop (>= 1440px)
+
+Brand 43px, links 22px/26.8px, 48px link gap.
+
+<Canvas of={NavigationBarStories.Desktop} />
+
+### Screen — Laptop (1024–1439px)
+
+Brand 40px, links 18px/22px, 39px link gap.
+
+<Canvas of={NavigationBarStories.Laptop} />
+
+### State — Active link
+
+`activeHref` underlines the matching link and sets `aria-current="page"`.
+
+<Canvas of={NavigationBarStories.ActiveLink} />
+
+### State — Disabled call-to-action
+
+`ctaDisabled` sets `disabled` and `aria-disabled="true"`, and `onCtaClick` no longer fires.
+
+<Canvas of={NavigationBarStories.DisabledCta} />
+
+### State — Compact menu open
+
+Below 1024px the links collapse behind a hamburger button. `menuOpen` forces that panel open.
+
+<Canvas of={NavigationBarStories.MenuOpen} />
+
+## Usage
+
+```tsx
+import { NavigationBar } from '../components/NavigationBar/NavigationBar';
+
+export function SiteHeader() {
+  return (
+    <NavigationBar
+      activeHref="#products"
+      links={[
+        { label: 'Home', href: '#home' },
+        { label: 'Products', href: '#products' },
+        { label: 'Trend', href: '#trend' },
+        { label: 'Help & Support', href: '#help' },
+      ]}
+      onCtaClick={() => console.log('login')}
+    />
+  );
+}
+```
+
+## Responsive
+
+The root is `width: 100%`, so it fills whatever container it is given — at 1440px and 1024px that
+reproduces the Figma frames exactly (95px tall).
+
+Below 1024px, which Figma does not draw, the bar stays usable down to 375px: horizontal padding
+becomes `clamp(16px, 4vw, 46px)`, the wordmark `clamp(24px, 4.5vw, 40px)`, and the link row moves
+into a full-width disclosure panel under the bar, opened by a hamburger button.
+
+## Accessibility
+
+- Root is `<nav aria-label="Main">`; links are a real `<ul>` / `<li>` / `<a>` list.
+- The current page link carries `aria-current="page"`.
+- The call-to-action is a `<button type="button">`; when `ctaDisabled` it is `disabled` with
+  `aria-disabled="true"` and the click handler is skipped.
+- The compact menu button has `aria-expanded`, `aria-controls` pointing at the link list, and an
+  `aria-label` that switches between "Open navigation menu" and "Close navigation menu".
+- `Escape` anywhere in the bar closes an open compact menu; choosing a link closes it too.
+- Brand, links, CTA and the menu button are all natively focusable in that order, each with a
+  `:focus-visible` outline.
+
+## Assumptions
+
+- No Hover/Focus/Pressed frames exist in Figma, so those states use the conventional pattern:
+  underline on link hover, a 2px white focus ring, and the CTA darkening to `#4338ca` (hover) and
+  `#3730a3` (pressed).
+- The "nav links" node is a group of absolutely positioned text with uneven gaps (39/49/30px on
+  the laptop frame); one gap per breakpoint is used instead — 48px desktop, 39px laptop.
+- The task lists a `Button` dependency, but no `Button` component exists in this repository, so
+  the CTA is a native `<button>` styled from the Figma instance's own values.
+- Instrument Serif, Instrument Sans and Inter are referenced by family name with system fallbacks;
+  the host application loads the webfonts.
