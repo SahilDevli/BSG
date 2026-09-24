@@ -1,0 +1,57 @@
+// Notice Card — Figma node 484:520 (374 x 359).
+// Node tree: Rectangle 1 (card surface) / "Notice 1" (title) / body text / Button instance.
+
+.noticeCard {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 359px;
+  padding: 25px var(--spacing-10) 26px; // 25px 28px 26px — Figma offsets
+  border-radius: 13px;
+  background-color: var(--colors-neutral-200);
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+}
+
+.noticeCard__title {
+  margin: 0 0 34px;
+  color: var(--colors-neutral-900);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.05px;
+}
+
+.noticeCard__description {
+  width: 100%;
+  max-width: 313px; // Figma text frame width
+  margin: 0;
+  color: var(--colors-neutral-700);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+}
+
+.noticeCard__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  margin-right: 13px; // 28px padding + 13px = 41px gap to the card edge in Figma
+  padding-top: var(--spacing-8);
+}
+
+// Below the 374px design width: shed the decorative offsets so nothing clips.
+@media (max-width: 374px) {
+  .noticeCard {
+    padding: var(--spacing-8) var(--spacing-7); // 20px 16px
+  }
+
+  .noticeCard__title {
+    margin-bottom: var(--spacing-9); // 24px
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .noticeCard__footer {
+    margin-right: 0;
+  }
+}
