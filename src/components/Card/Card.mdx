@@ -1,0 +1,79 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+
+<Meta of={CardStories} />
+
+# Card
+
+A 300 × 320 surface for a short piece of content. Use it for a documentation teaser, a media
+tile or a single metric — one `type` prop switches between the three layouts.
+
+<Canvas of={CardStories.Basic} />
+
+<Controls />
+
+## Variants
+
+### Type=Basic
+
+Title and description at the top, a "View documentation" link with an arrow icon pinned to the
+bottom, 24px padding and a `--colors-neutral-200` border.
+
+<Canvas of={CardStories.Basic} />
+
+### Type=Image
+
+A 120px media band at the top — the Figma gradient placeholder unless `imageSrc` is passed —
+then badge, title and description in a padded block pinned to the bottom.
+
+<Canvas of={CardStories.Image} />
+
+### Type=Stat
+
+An uppercase 12px label with a 36px value at the top, a trend pill and caption at the bottom,
+and a `--colors-primary-700` border.
+
+<Canvas of={CardStories.Stat} />
+
+## Usage
+
+```tsx
+import { Card } from '../components/Card/Card';
+
+export function Metrics() {
+  return (
+    <Card
+      type="Stat"
+      title="Monthly revenue"
+      description="$48.2k"
+      trend="12.4%"
+      trendCaption="since last month"
+    />
+  );
+}
+```
+
+## Responsive
+
+The card is 300px wide with `max-width: 100%`, so it never overflows a narrower container, and
+`min-height: 320px` lets it grow rather than clip when copy is longer than the design's. Below
+768px it fills the width of its column. Title, description and stat value wrap mid-word if
+needed, and the Stat footer wraps the caption under the trend pill when space runs out.
+
+## Accessibility
+
+- The root is an `<article>` labelled by its heading via `aria-labelledby`.
+- The title (and the Stat label) is an `<h3>`; the Stat value is a paragraph.
+- Both arrow icons are decorative `<img aria-hidden="true">` — the adjacent text carries the meaning.
+- The `Basic` action link is a real `<a>`: it is in the tab order, shows a 2px focus outline on
+  `:focus-visible`, and changes colour on `:hover` / `:active`. Motion is disabled under
+  `prefers-reduced-motion`.
+
+## Assumptions
+
+Figma defines this component only at 300 × 320, with a single `Type` axis and no interaction
+states. The link states, the responsive rules above, the `<article>` / `<h3>` semantics, the
+gradient image placeholder (the Figma layer is named `image-placeholder` and has no exportable
+asset) and the `'Inter', system-ui` font stack were all decided in code. Colours with no token in
+`src/designToken.css` (`#e5e7eb`, `#eef2ff`, `#4f46e5`, `#111827`, `#c7d2fe`, and the
+`rgba(0, 0, 0, 0.02)` shadow) are kept as literals. Full list in `Card.md`.

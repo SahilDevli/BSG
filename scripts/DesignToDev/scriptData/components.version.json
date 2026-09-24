@@ -93,10 +93,10 @@
       ],
       "dependsOn": [],
       "description": "",
-      "codeStatus": "readyToCreate",
-      "builtAgainstHash": null,
-      "builtAt": null,
-      "builtWithModel": null,
+      "codeStatus": "created",
+      "builtAgainstHash": "226d94d7878f4247",
+      "builtAt": "2026-09-24T12:42:07.384Z",
+      "builtWithModel": "claude-sonnet-5",
       "targetDir": null
     },
     {
@@ -148,11 +148,12 @@
       ],
       "dependsOn": [],
       "description": "",
-      "codeStatus": "readyToCreate",
-      "builtAgainstHash": null,
-      "builtAt": null,
-      "builtWithModel": null,
-      "targetDir": null
+      "codeStatus": "created",
+      "builtAgainstHash": "5685cf43dc7a004c",
+      "builtAt": "2026-09-24T12:53:36.580Z",
+      "builtWithModel": "claude-opus-5",
+      "targetDir": "src/components/Card",
+      "docsBuiltAgainstHash": "5685cf43dc7a004c"
     },
     {
       "name": "Input",

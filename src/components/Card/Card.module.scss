@@ -1,0 +1,222 @@
+/* Card — values taken from Figma node 5:38 (Type=Basic 5:35, Type=Image 5:36, Type=Stat 5:37).
+   Tokens come from src/designToken.css; literals are colours Figma uses that have no token. */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  max-width: 100%;
+  min-height: 320px;
+  border-radius: var(--radius-2);
+  background: var(--colors-neutral-100);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  &,
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+/* ── Type=Basic ─────────────────────────────────────────────────────────── */
+
+.card--basic {
+  padding: var(--spacing-9);
+  border: var(--stroke-1) solid var(--colors-neutral-200);
+
+  .card__body {
+    gap: var(--spacing-6);
+  }
+}
+
+/* ── Type=Image ─────────────────────────────────────────────────────────── */
+
+.card--image {
+  padding: 0;
+  border: var(--stroke-1) solid #e5e7eb;
+  overflow: hidden;
+
+  .card__title {
+    color: #111827;
+  }
+
+  .card__description {
+    font-size: 13px;
+    line-height: 18.2px;
+    color: var(--colors-neutral-600);
+  }
+
+  .card__body {
+    gap: var(--spacing-3);
+  }
+}
+
+.card__media {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Figma ships this node as a gradient named "image-placeholder" — no asset to export. */
+.card__media--placeholder {
+  background: linear-gradient(135deg, #eef2ff 0%, #c7d2fe 100%);
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
+}
+
+.card__badge {
+  align-self: flex-start;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-1);
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 13.31px;
+  text-transform: uppercase;
+}
+
+/* ── Type=Stat ──────────────────────────────────────────────────────────── */
+
+.card--stat {
+  padding: var(--spacing-9);
+  border: var(--stroke-1) solid var(--colors-primary-700);
+
+  .card__body {
+    gap: var(--spacing-4);
+  }
+
+  .card__footer {
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+  }
+}
+
+.card__label {
+  margin: 0;
+  color: var(--colors-neutral-500);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.52px;
+  text-transform: uppercase;
+}
+
+.card__value {
+  margin: 0;
+  color: #111827;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 43.57px;
+  overflow-wrap: anywhere;
+}
+
+.card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-1);
+  background: var(--colors-neutral-300);
+  color: var(--colors-secondary-700);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.52px;
+}
+
+.card__caption {
+  color: var(--colors-neutral-500);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15.73px;
+}
+
+/* ── Shared blocks ──────────────────────────────────────────────────────── */
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__title {
+  margin: 0;
+  color: var(--colors-neutral-900);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 21.78px;
+  overflow-wrap: anywhere;
+}
+
+.card__description {
+  margin: 0;
+  color: var(--colors-primary-100);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  overflow-wrap: anywhere;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  border-radius: var(--radius-1);
+  color: var(--colors-primary-400);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.94px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--colors-primary-700);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: var(--stroke-2) solid var(--colors-primary-700);
+    outline-offset: var(--spacing-1);
+  }
+
+  &:active {
+    color: var(--colors-primary-900);
+  }
+
+  &:hover .card__linkIcon,
+  &:focus-visible .card__linkIcon {
+    transform: translateX(2px);
+  }
+}
+
+.card__linkIcon {
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card__link,
+  .card__linkIcon {
+    transition: none;
+  }
+}
+
+/* ── Responsive (no mobile design exists — see Card.md › Assumptions) ───── */
+
+@media (max-width: 767px) {
+  .card {
+    width: 100%;
+  }
+}
