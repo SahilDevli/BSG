@@ -1,0 +1,72 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as NoticeCardStories from './NoticeCard.stories';
+
+<Meta of={NoticeCardStories} />
+
+# Notice Card
+
+A flat, surface-coloured card carrying a short notice: a heading, a paragraph of body copy
+and one action button pinned to the bottom-right. Use it for inline announcements, release
+notes or configuration hints inside a page.
+
+<Canvas of={NoticeCardStories.Default} />
+
+<Controls />
+
+## Variants
+
+The Figma component has **no variant properties** — `Notice Card` (374 × 359) is the only
+variant, and everything that differs between instances is content passed through props.
+
+<Canvas of={NoticeCardStories.Default} />
+
+## Usage
+
+```tsx
+import NoticeCard from '../components/NoticeCard/NoticeCard';
+
+<NoticeCard
+  title="Notice 1"
+  description="These configuration files allow you to configure things like your database connection information."
+  actionLabel="more"
+  onActionClick={() => setOpen(true)}
+/>;
+```
+
+## Responsive
+
+The root is `width: 100%` with `min-height: 359px`, so it fills whatever container it is
+given from 375px upwards — no overrides are needed at the tablet, laptop, desktop or large
+breakpoints. The body copy keeps its Figma measure via `max-width: 313px`, and longer text
+grows the card downwards instead of overflowing it.
+
+Below the 374px design width a single override kicks in (`@media (max-width: 374px)`):
+padding drops to 20px / 16px, the title to 20px/24px, and the footer's 13px right offset is
+removed. Nothing is hidden or removed.
+
+## Accessibility
+
+- The root is a `<section>` with `aria-labelledby` pointing at the title, so it is exposed as
+  a named `region`.
+- The title renders as an `<h3>` with a generated `useId()` id.
+- The action is a real `<button type="button">`; it is reachable by <kbd>Tab</kbd>, activates
+  with <kbd>Enter</kbd> / <kbd>Space</kbd>, and shows a `:focus-visible` outline in
+  `--colors-primary-700`. It also restyles on `:hover` and `:active`.
+
+## Assumptions
+
+- The `figma` MCP server is not authorized in this session, so the design data came from the
+  Figma REST API for node `484:520` using the repo's existing `FIGMA_PAT`, checked against the
+  rendered PNG of the same node.
+- `src/components/**/Button/Button.tsx` did not exist in the repo, so a minimal `Button` was
+  created at `src/components/atoms/Button/Button.tsx` from Figma node `2:72`. The pipeline's
+  own Button step writes to that same path.
+- Figma carries no semantics; `<section>` + `aria-labelledby` and an `<h3>` title are the
+  conventional accessible pattern for a card like this.
+- The card radius (13px), outer paddings (25 / 28 / 26px), the 34px title→body gap and the
+  Button's `#4f46e5` fill have no matching design token, so they are literals; every value
+  that does match a token uses `var(--token)`.
+- `min-height` replaces Figma's fixed 359px height so longer copy grows the card, and the
+  footer's `margin-right: 13px` reproduces the 41px gap Figma leaves to the right of the
+  button.
+- Node `484:520` contains no images or icons, so no assets were downloaded.
